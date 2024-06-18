@@ -6,6 +6,10 @@ import { Link } from "react-router-dom";
 // @mui material components
 import Card from "@mui/material/Card";
 import Checkbox from "@mui/material/Checkbox";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
@@ -14,13 +18,18 @@ import MDInput from "components/MDInput";
 import MDButton from "components/MDButton";
 
 // Authentication layout components
-import CoverLayout from "layouts/authentication/components/CoverLayout";
 import BasicLayout from "layouts/authentication/components/BasicLayout";
 
 // Images
 import bgImage from "assets/images/bg-sign-up-cover.jpeg";
 
 function Cover() {
+  const [accountType, setAccountType] = React.useState("");
+
+  const handleAccountTypeChange = (event) => {
+    setAccountType(event.target.value);
+  };
+
   return (
     <BasicLayout image={bgImage}>
       <Card>
@@ -45,7 +54,7 @@ function Cover() {
         <MDBox pt={4} pb={3} px={3}>
           <MDBox component="form" role="form">
             <MDBox mb={2}>
-              <MDInput type="name" label="Name" fullWidth />
+              <MDInput type="text" label="Name" fullWidth />
             </MDBox>
             <MDBox mb={2}>
               <MDInput type="email" label="Email" fullWidth />
@@ -54,7 +63,23 @@ function Cover() {
               <MDInput type="password" label="Password" fullWidth />
             </MDBox>
             <MDBox mb={2}>
-              <MDInput type="Address" label="Address" fullWidth />
+              <MDInput type="text" label="Address" fullWidth />
+            </MDBox>
+            <MDBox mb={2}>
+              <FormControl fullWidth>
+                <InputLabel id="account-type-label">Account Type</InputLabel>
+                <Select
+                  labelId="account-type-label"
+                  id="account-type"
+                  value={accountType}
+                  label="Account Type"
+                  onChange={handleAccountTypeChange}
+                  sx={{ height: "44px" }}
+                >
+                  <MenuItem value="customer">Customer</MenuItem>
+                  <MenuItem value="deliverer">Deliverer</MenuItem>
+                </Select>
+              </FormControl>
             </MDBox>
             <MDBox display="flex" alignItems="center" ml={-1}>
               <Checkbox />
@@ -64,7 +89,7 @@ function Cover() {
                 color="text"
                 sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
               >
-                &nbsp;&nbsp;I agree the&nbsp;
+                &nbsp;&nbsp;I agree to the&nbsp;
               </MDTypography>
               <MDTypography
                 component="a"
