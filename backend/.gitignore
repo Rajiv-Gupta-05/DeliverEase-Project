@@ -1,0 +1,37 @@
+# Virtual environment
+venv/
+.venv/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+
+# Environment variables
+.env
+
+# Log files
+*.log
+
+# Compiled code
+*.so
+*.dylib
+*.dll
+
+# Editor/IDE configurations
+.vscode/
+.idea/
+
+# Docker files
+.dockerignore
+
+# Node modules (if applicable)
+node_modules/
+
+# Coverage reports
+htmlcov/
+.coverage
+
+# Build files
+build/
+dist/
+*.egg-info/
