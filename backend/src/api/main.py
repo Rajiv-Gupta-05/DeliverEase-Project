@@ -1,7 +1,7 @@
 import asyncio
-import asyncpg
+import asyncpg  # type: ignore
 from fastapi import FastAPI
-from .config import settings
+from src.api.config import settings
 
 app = FastAPI()
 
@@ -34,7 +34,7 @@ async def on_shutdown():
 async def read_root():
     return {"Hello": "World"}
 
-# Run the application with: uvicorn app.main:app --reload
+# Run the application with: uvicorn api.main:app --reload
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("api.main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("src.api.main:app", host="0.0.0.0", port=8000, reload=True)
