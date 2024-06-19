@@ -1,26 +1,8 @@
-import asyncio
-import asyncpg  # type: ignore
 from fastapi import FastAPI
-from src.api.config import settings
+from src.api.utils.database import database # type: ignore
+from src.api.routers import user
 
 app = FastAPI()
-
-class Database:
-    def __init__(self, dsn):
-        self.dsn = dsn
-        self.connection = None
-
-    async def connect(self):
-        self.connection = await asyncpg.connect(self.dsn)
-        print("Connected to database")
-
-    async def disconnect(self):
-        if self.connection:
-            await self.connection.close()
-            print("Disconnected from database")
-
-# Database instance with the DSN from settings
-database = Database(settings.database_url)
 
 @app.on_event("startup")
 async def on_startup():
@@ -30,11 +12,13 @@ async def on_startup():
 async def on_shutdown():
     await database.disconnect()
 
+app.include_router(user.router, prefix="/api")
+
 @app.get("/")
 async def read_root():
     return {"Hello": "World"}
 
-# Run the application with: uvicorn api.main:app --reload
+# Run the application with: uvicorn src.api.utils.main:app --reload
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("src.api.main:app", host="0.0.0.0", port=8000, reload=True)
