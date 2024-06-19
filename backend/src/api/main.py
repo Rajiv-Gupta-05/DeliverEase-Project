@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from src.api.utils.database import database # type: ignore
-from src.api.routers import user
+from src.models.db.database import database # type: ignore
+from src.api.routes import user
 
 app = FastAPI()
 
