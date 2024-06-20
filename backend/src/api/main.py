@@ -14,10 +14,6 @@ async def on_shutdown():
 
 app.include_router(user.router, prefix="/api")
 
-@app.get("/")
-async def read_root():
-    return {"Hello": "World"}
-
 # Run the application with: uvicorn src.api.utils.main:app --reload
 if __name__ == "__main__":
     import uvicorn
